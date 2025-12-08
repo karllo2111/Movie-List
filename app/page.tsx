@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     const loadMovies = async () => {
-      const res = await fetch("/api/movies");
+      const res = await fetch("/api/movies", { cache: "no-store" }); 
       const data = await res.json();
       setMovies(data.results);
     };
