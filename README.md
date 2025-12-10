@@ -1,4 +1,3 @@
-Berikut README versi **profesional**, **bersih**, **tanpa bahasa alay**, dan **tanpa promosi Next.js**.
 
 ---
 
@@ -46,8 +45,8 @@ Link:
 Clone repository:
 
 ```bash
-git clone <your_repo_url>
-cd <your_repo_folder>
+git clone <repo_url>
+cd <repo_folder>
 ```
 
 Install dependencies:
