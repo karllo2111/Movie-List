@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import MovieCard from "@/components/Moviecard";
 import SideBar from "@/components/SideBard";
+import BottomBar from "@/components/BottomBar";
 
 interface Movie {
   id: number;
@@ -95,7 +96,7 @@ export default function Home() {
         </div>
 
         {/* Load More */}
-        <div className="w-full flex justify-center mb-10">
+        <div className="w-full flex justify-center md:mb-10 mb-20">
           <button
             onClick={() => {
               const nextPage = page + 1;
@@ -108,6 +109,10 @@ export default function Home() {
             {loading ? "Loading..." : "Load More"}
           </button>
         </div>
+
+
+        {/* Bottom Bar for Mobile */}
+        <BottomBar />
       </div>
     </div>
   );
