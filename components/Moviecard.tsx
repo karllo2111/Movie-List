@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import Image from "next/image";
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 export default function MovieCard({ title, poster, date, rating }: Props) {
     return (
-        <div className="w-44 mb-10 text-white">
+        <div className="w-43 mb-10 text-white">
             
             {/* Poster */}
             <div className="rounded-xl overflow-hidden bg-[#2b2b2b] h-64 
@@ -31,7 +32,7 @@ export default function MovieCard({ title, poster, date, rating }: Props) {
             </div>
 
             {/* Title */}
-            <h2 className="mt-3 font-semibold text-sm line-clamp-2">
+            <h2 className="mt-3 font-semibold text-sm line-clamp-1">
                 {title}
             </h2>
 
@@ -41,8 +42,8 @@ export default function MovieCard({ title, poster, date, rating }: Props) {
             </p>
 
             {/* Rating */}
-            <div className="mt-1 font-semibold text-sm text-yellow-400">
-                ⭐ {rating.toFixed(1)}
+            <div className="flex gap-1 mt-1 font-semibold text-sm text-yellow-400">
+                <Star size={16}/> {rating.toFixed(1)}
             </div>
         </div>
     );

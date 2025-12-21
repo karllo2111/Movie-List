@@ -14,33 +14,96 @@ interface Movie {
 
 export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
+
+  const loadMovies = async (pageNumber: number) => {
+    setLoading(true);
+
+    const res = await fetch(`/api/movies?page=${pageNumber}`, {
+      cache: "no-store"
+    });
+
+    const data = await res.json();
+
+    setMovies((prev) => [...prev, ...data.results]);
+
+    setLoading(false);
+  };
+
+  //kalo ada error itu error gajelas tapi berfungsi
   useEffect(() => {
-    const loadMovies = async () => {
-      const res = await fetch("/api/movies", { cache: "no-store" });
-      const data = await res.json();
-      setMovies(data.results);
-    };
-
-    loadMovies();
+    loadMovies(1);
   }, []);
 
   return (
     <div className="flex bg-[#1A1A1A] min-h-screen">
       <SideBar />
 
-      {/* konten utama */}
-      <div className="flex flex-wrap gap-4 px-6 py-6 ml-[260px] w-full">
-        {movies.map((m) => (
-          <MovieCard
-            key={m.id}
-            title={m.title}
-            poster={m.poster_path}
-            date={m.release_date}
-            rating={m.vote_average}
+      <div className="ml-[260px] w-full">
+        {/* Welcome Box */}
+        <div className="bg-[#D9D9D919] border border-[#A41B1B] mt-10 mx-10 rounded-xl p-6 text-white">
+          <h1 className="text-3xl font-semibold">
+            Welcome to <span className="text-red-500">Mooovies</span>
+          </h1>
+
+          <p className="mt-3 text-sm opacity-80">
+            Browse movies, add them to watchlists and share them with friends.
+          </p>
+
+          <p className="mt-2 text-sm opacity-80">
+            Just click the <span className="font-bold">+</span> to add a movie, the
+            poster to see more details or <span className="font-bold">✔</span> to
+            mark the movie as watched.
+          </p>
+        </div>
+
+        {/* Search Bar */}
+        <div className="flex items-center mt-8 mx-10">
+          <input
+            type="text"
+            placeholder="Search for movies by title"
+            className="w-full bg-[#0F0F0F] border border-gray-700 rounded-lg px-4 py-3 text-sm text-white outline-none"
           />
-        ))}
+          <button className="ml-3 bg-red-500 px-6 py-3 rounded-lg text-sm font-medium">
+            search
+          </button>
+        </div>
+
+        {/* Title */}
+        <h2 className="text-white text-xl font-semibold mt-10 mx-10">
+          Popular movies right now
+        </h2>
+
+        {/* Cards */}
+        <div className="flex flex-wrap gap-4 px-10 py-6">
+          {movies.map((m) => (
+            <MovieCard
+              key={m.id}
+              title={m.title}
+              poster={m.poster_path}
+              date={m.release_date}
+              rating={m.vote_average}
+            />
+          ))}
+        </div>
+
+        <div className="w-full flex justify-center mb-10">
+          <button
+            onClick={() => {
+              const nextPage = page + 1;
+              setPage(nextPage);
+              loadMovies(nextPage);
+            }}
+            disabled={loading}
+            className="bg-red-500 px-6 py-3  rounded-xl text-white"
+          >
+            {loading ? "Loading..." : "Load More"}
+          </button>
+        </div>
       </div>
     </div>
   );
+
 }
