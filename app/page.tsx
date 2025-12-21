@@ -39,12 +39,17 @@ export default function Home() {
 
   return (
     <div className="flex bg-[#1A1A1A] min-h-screen">
-      <SideBar />
+      
+      {/* Sidebar */}
+      <div className="hidden lg:block">
+        <SideBar />
+      </div>
 
-      <div className="ml-[260px] w-full">
+      {/* Content */}
+      <div className="w-full lg:ml-[260px]">
         {/* Welcome Box */}
-        <div className="bg-[#D9D9D919] border border-[#A41B1B] mt-10 mx-10 rounded-xl p-6 text-white">
-          <h1 className="text-3xl font-semibold">
+        <div className="bg-[#D9D9D919] border border-[#A41B1B] mt-6 lg:mt-10 mx-4 lg:mx-10 rounded-xl p-4 lg:p-6 text-white">
+          <h1 className="text-2xl lg:text-3xl font-semibold">
             Welcome to <span className="text-red-500">Mooovies</span>
           </h1>
 
@@ -60,24 +65,24 @@ export default function Home() {
         </div>
 
         {/* Search Bar */}
-        <div className="flex items-center mt-8 mx-10">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center mt-6 mx-4 lg:mx-10 gap-3">
           <input
             type="text"
             placeholder="Search for movies by title"
             className="w-full bg-[#0F0F0F] border border-gray-700 rounded-lg px-4 py-3 text-sm text-white outline-none"
           />
-          <button className="ml-3 bg-red-500 px-6 py-3 rounded-lg text-sm font-medium">
-            search
+          <button className="bg-red-500 px-6 py-3 rounded-lg text-sm font-medium">
+            Search
           </button>
         </div>
 
         {/* Title */}
-        <h2 className="text-white text-xl font-semibold mt-10 mx-10">
+        <h2 className="text-white text-lg lg:text-xl font-semibold mt-8 mx-4 lg:mx-10">
           Popular movies right now
         </h2>
 
         {/* Cards */}
-        <div className="flex flex-wrap gap-4 px-10 py-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-4 lg:px-10 py-6">
           {movies.map((m) => (
             <MovieCard
               key={m.id}
@@ -89,6 +94,7 @@ export default function Home() {
           ))}
         </div>
 
+        {/* Load More */}
         <div className="w-full flex justify-center mb-10">
           <button
             onClick={() => {
@@ -97,7 +103,7 @@ export default function Home() {
               loadMovies(nextPage);
             }}
             disabled={loading}
-            className="bg-red-500 px-6 py-3  rounded-xl text-white"
+            className="bg-red-500 px-6 py-3 rounded-xl text-white disabled:opacity-60 md:w-240 w-100 hover:bg-red-300 transition"
           >
             {loading ? "Loading..." : "Load More"}
           </button>
@@ -105,5 +111,4 @@ export default function Home() {
       </div>
     </div>
   );
-
 }
