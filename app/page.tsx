@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <div className="flex bg-[#1A1A1A] min-h-screen">
-      
+
       {/* Sidebar */}
       <div className="hidden lg:block">
         <SideBar />
@@ -84,9 +84,10 @@ export default function Home() {
 
         {/* Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-4 lg:px-10 py-6">
-          {movies.map((m) => (
+          {movies.map((m, index) => (
             <MovieCard
-              key={m.id}
+              key={`${m.id}-${index}`}
+              id={m.id}
               title={m.title}
               poster={m.poster_path}
               date={m.release_date}
