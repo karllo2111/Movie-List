@@ -198,10 +198,10 @@ export default function MovieDetailPage() {
 
               {/* 4. CAST SECTION (Optimized Snap Scroll) */}
               <div>
-                <h2 className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-red-600 font-black mb-6 flex items-center gap-2">
+                <h2 className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-red-600 font-black mb-6 flex items-center gap-3">
                   <User size={14} /> Top Cast
                 </h2>
-                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
+                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory mx-1 px-4 md:mx-0 md:px-0">
                   {cast.slice(0, 15).map((person) => (
                     <div key={person.id} className="flex-shrink-0 w-28 md:w-32 snap-start group">
                       <div className="relative h-36 md:h-40 w-full rounded-xl overflow-hidden mb-2 grayscale group-hover:grayscale-0 transition-all border border-white/5">
@@ -221,7 +221,7 @@ export default function MovieDetailPage() {
               {/* 5. RECOMMENDATIONS SECTION (Optimized Snap Scroll) */}
               <div>
                 <h2 className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-red-600 font-black mb-6">You Might Also Like</h2>
-                <div className="flex gap-3 md:gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
+                <div className="flex gap-3 md:gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory mx-1 px-4 md:mx-0 md:px-0">
                   {recommendations.slice(0, 15).map((rec) => (
                     <div
                       key={rec.id}
