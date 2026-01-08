@@ -10,13 +10,18 @@ export async function GET(
     return NextResponse.json({ error: "ID missing" }, { status: 400 });
   }
 
+  // Tambahkan append_to_response untuk mengambil data tambahan sekaligus
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}`,
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_KEY}&append_to_response=credits,recommendations,videos`,
     { cache: "no-store" }
   );
 
   if (!res.ok) {
-    return NextResponse.json({ error: "Movie not found" }, { status: 404 });
+    const errorData = await res.json();
+    return NextResponse.json(
+      { error: errorData.status_message || "Movie not found" }, 
+      { status: res.status }
+    );
   }
 
   const data = await res.json();
