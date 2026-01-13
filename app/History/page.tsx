@@ -14,6 +14,7 @@ export default function History() {
             </div>
 
             <h1 className="font-bold ml-150 font text-3xl text-[#F33F3F] mb-6">History</h1>
+                <h1>test adding data on new os linux</h1>
 
             {/* Bottom Bar for Mobile */}
             <BottomBar />
